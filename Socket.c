@@ -16,7 +16,7 @@ int socketCreate(Socket **ps, char *host, int port, Protocol protocol) {
     int fd;
     struct sockaddr_in adr_inet;
     int adr_len;
-    int ret = 0;
+    int ret = -1;
     int prot = ( protocol == STREAM ? SOCK_STREAM : SOCK_DGRAM);
 
     fd = socket(PF_INET, SOCK_STREAM, 0);
@@ -61,7 +61,7 @@ int socketCreate(Socket **ps, char *host, int port, Protocol protocol) {
         return ret;
     }
 
-    return !ret;
+    return ret + 1;
 
 }
 

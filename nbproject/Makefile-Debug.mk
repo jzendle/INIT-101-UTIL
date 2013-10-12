@@ -45,6 +45,8 @@ TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
 # Test Files
 TESTFILES= \
 	${TESTDIR}/TestFiles/f2 \
+	${TESTDIR}/TestFiles/f3 \
+	${TESTDIR}/TestFiles/f4 \
 	${TESTDIR}/TestFiles/f1
 
 # C Compiler Flags
@@ -95,6 +97,14 @@ ${TESTDIR}/TestFiles/f2: ${TESTDIR}/tests/socketTest.o ${OBJECTFILES:%.o=%_nomai
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.c}   -o ${TESTDIR}/TestFiles/f2 $^ ${LDLIBSOPTIONS} -L/usr/local/lib -lcunit 
 
+${TESTDIR}/TestFiles/f3: ${TESTDIR}/tests/logTest.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c}   -o ${TESTDIR}/TestFiles/f3 $^ ${LDLIBSOPTIONS} -lcunit 
+
+${TESTDIR}/TestFiles/f4: ${TESTDIR}/tests/test.o ${OBJECTFILES:%.o=%_nomain.o}
+	${MKDIR} -p ${TESTDIR}/TestFiles
+	${LINK.c}   -o ${TESTDIR}/TestFiles/f4 $^ ${LDLIBSOPTIONS} `cppunit-config --libs`   
+
 ${TESTDIR}/TestFiles/f1: ${TESTDIR}/tests/TestSocket.o ${OBJECTFILES:%.o=%_nomain.o}
 	${MKDIR} -p ${TESTDIR}/TestFiles
 	${LINK.c}   -o ${TESTDIR}/TestFiles/f1 $^ ${LDLIBSOPTIONS} 
@@ -104,6 +114,18 @@ ${TESTDIR}/tests/socketTest.o: tests/socketTest.c
 	${MKDIR} -p ${TESTDIR}/tests
 	${RM} $@.d
 	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/socketTest.o tests/socketTest.c
+
+
+${TESTDIR}/tests/logTest.o: tests/logTest.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.c) -g -lcunit -MMD -MP -MF $@.d -o ${TESTDIR}/tests/logTest.o tests/logTest.c
+
+
+${TESTDIR}/tests/test.o: tests/test.c 
+	${MKDIR} -p ${TESTDIR}/tests
+	${RM} $@.d
+	$(COMPILE.c) -g `cppunit-config --cflags` -MMD -MP -MF $@.d -o ${TESTDIR}/tests/test.o tests/test.c
 
 
 ${TESTDIR}/tests/TestSocket.o: tests/TestSocket.c 
@@ -156,6 +178,8 @@ ${OBJECTDIR}/Timer_nomain.o: ${OBJECTDIR}/Timer.o Timer.c
 	@if [ "${TEST}" = "" ]; \
 	then  \
 	    ${TESTDIR}/TestFiles/f2 || true; \
+	    ${TESTDIR}/TestFiles/f3 || true; \
+	    ${TESTDIR}/TestFiles/f4 || true; \
 	    ${TESTDIR}/TestFiles/f1 || true; \
 	else  \
 	    ./${TEST} || true; \

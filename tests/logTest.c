@@ -1,8 +1,8 @@
 /*
- * File:   newcunittest.c
+ * File:   logTest.c
  * Author: jzendle
  *
- * Created on Oct 8, 2013, 9:33:07 PM
+ * Created on Oct 11, 2013, 8:18:22 PM
  */
 
 #include <stdio.h>
@@ -37,7 +37,7 @@ int main() {
         return CU_get_error();
 
     /* Add a suite to the registry */
-    pSuite = CU_add_suite("newcunittest", init_suite, clean_suite);
+    pSuite = CU_add_suite("logTest", init_suite, clean_suite);
     if (NULL == pSuite) {
         CU_cleanup_registry();
         return CU_get_error();

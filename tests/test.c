@@ -1,13 +1,13 @@
 /*
- * File:   newcunittest.c
+ * File:   test.c
  * Author: jzendle
  *
- * Created on Oct 8, 2013, 9:33:07 PM
+ * Created on Oct 11, 2013, 8:38:55 PM
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <CUnit/Basic.h>
+#include "CUnit/Basic.h"
 
 /*
  * CUnit Test Suite
@@ -37,7 +37,7 @@ int main() {
         return CU_get_error();
 
     /* Add a suite to the registry */
-    pSuite = CU_add_suite("newcunittest", init_suite, clean_suite);
+    pSuite = CU_add_suite("test", init_suite, clean_suite);
     if (NULL == pSuite) {
         CU_cleanup_registry();
         return CU_get_error();

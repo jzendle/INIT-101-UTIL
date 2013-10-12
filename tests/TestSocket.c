@@ -33,6 +33,7 @@ void test1() {
     
     socketRelease(ps);
 
+     printf("%%TEST_PASSED%% time=0 testname=test2 (TestSocket) message=socket listened\n");
 
 }
 
@@ -40,7 +41,7 @@ void test2() {
     printf("TestSocket test 2\n");
     pSocket ps;
 
-    if (!socketCreate(&ps, 0, 9000, STREAM) && !socketRelease(ps)) {
+    if (!socketCreate(&ps, 0, 8000, STREAM) && !socketRelease(ps)) {
         printf("%%TEST_PASSED%% time=0 testname=test2 (TestSocket) message=socket created and freed\n");
     } else
 
