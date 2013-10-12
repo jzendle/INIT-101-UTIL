@@ -4,7 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Logger.h</itemPath>
       <itemPath>Socket.h</itemPath>
+      <itemPath>Timer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -13,7 +15,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Logger.c</itemPath>
       <itemPath>Socket.c</itemPath>
+      <itemPath>Timer.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -47,9 +51,17 @@
       </toolsSet>
       <compileType>
       </compileType>
+      <item path="Logger.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Logger.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Socket.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Timer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Timer.h" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>
@@ -118,9 +130,17 @@
           </linkerAddLib>
         </linkerTool>
       </compileType>
+      <item path="Logger.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Logger.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Socket.c" ex="false" tool="0" flavor2="0">
       </item>
       <item path="Socket.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Timer.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="Timer.h" ex="false" tool="3" flavor2="0">
       </item>
       <folder path="TestFiles/f1">
         <cTool>

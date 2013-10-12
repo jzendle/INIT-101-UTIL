@@ -35,7 +35,9 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/Socket.o
+	${OBJECTDIR}/Logger.o \
+	${OBJECTDIR}/Socket.o \
+	${OBJECTDIR}/Timer.o
 
 # Test Directory
 TESTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tests
@@ -69,10 +71,20 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libINIT-101-UTIL.${CND_DLIB_EXT}: ${O
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libINIT-101-UTIL.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -shared -fPIC
 
+${OBJECTDIR}/Logger.o: Logger.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger.o Logger.c
+
 ${OBJECTDIR}/Socket.o: Socket.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -g -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Socket.o Socket.c
+
+${OBJECTDIR}/Timer.o: Timer.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/Timer.o Timer.c
 
 # Subprojects
 .build-subprojects:
@@ -100,6 +112,19 @@ ${TESTDIR}/tests/TestSocket.o: tests/TestSocket.c
 	$(COMPILE.c) -g -I. -MMD -MP -MF $@.d -o ${TESTDIR}/tests/TestSocket.o tests/TestSocket.c
 
 
+${OBJECTDIR}/Logger_nomain.o: ${OBJECTDIR}/Logger.o Logger.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Logger.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.c) -g -fPIC  -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/Logger_nomain.o Logger.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Logger.o ${OBJECTDIR}/Logger_nomain.o;\
+	fi
+
 ${OBJECTDIR}/Socket_nomain.o: ${OBJECTDIR}/Socket.o Socket.c 
 	${MKDIR} -p ${OBJECTDIR}
 	@NMOUTPUT=`${NM} ${OBJECTDIR}/Socket.o`; \
@@ -111,6 +136,19 @@ ${OBJECTDIR}/Socket_nomain.o: ${OBJECTDIR}/Socket.o Socket.c
 	    $(COMPILE.c) -g -fPIC  -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/Socket_nomain.o Socket.c;\
 	else  \
 	    ${CP} ${OBJECTDIR}/Socket.o ${OBJECTDIR}/Socket_nomain.o;\
+	fi
+
+${OBJECTDIR}/Timer_nomain.o: ${OBJECTDIR}/Timer.o Timer.c 
+	${MKDIR} -p ${OBJECTDIR}
+	@NMOUTPUT=`${NM} ${OBJECTDIR}/Timer.o`; \
+	if (echo "$$NMOUTPUT" | ${GREP} '|main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T main$$') || \
+	   (echo "$$NMOUTPUT" | ${GREP} 'T _main$$'); \
+	then  \
+	    ${RM} $@.d;\
+	    $(COMPILE.c) -g -fPIC  -Dmain=__nomain -MMD -MP -MF $@.d -o ${OBJECTDIR}/Timer_nomain.o Timer.c;\
+	else  \
+	    ${CP} ${OBJECTDIR}/Timer.o ${OBJECTDIR}/Timer_nomain.o;\
 	fi
 
 # Run Test Targets
