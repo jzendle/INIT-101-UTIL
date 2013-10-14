@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-    char *time_to_string(char *buf);
+    char *time_to_string(char *buf, int len);
 
 
 #ifdef	__cplusplus

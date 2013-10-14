@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <CUnit/Basic.h>
 
+#include "../Logger.h"
+
 /*
  * CUnit Test Suite
  */
@@ -22,10 +24,22 @@ int clean_suite(void) {
 }
 
 void test1() {
+    
+       
+    info("this is a test\n");
+    
+    infov("print %s\n", "this");
+    
     CU_ASSERT(2 * 2 == 4);
 }
 
 void test2() {
+    
+       
+    err("this is a problem\n");
+    
+    errv("print %s\n", "error");
+    
     CU_ASSERT(2 * 2 == 4);
 }
 
@@ -44,8 +58,8 @@ int main() {
     }
 
     /* Add the tests to the suite */
-    if ((NULL == CU_add_test(pSuite, "test1", test1)) ||
-            (NULL == CU_add_test(pSuite, "test2", test2))) {
+    if ((NULL == CU_add_test(pSuite, "test2", test2)) ||
+            (NULL == CU_add_test(pSuite, "test1", test1))) {
         CU_cleanup_registry();
         return CU_get_error();
     }
